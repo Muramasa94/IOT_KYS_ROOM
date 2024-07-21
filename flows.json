@@ -1,0 +1,1400 @@
+[
+    {
+        "id": "70d1edf009669b1f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1f35d8070d08aa76",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d4bb2d7a23165e78",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f658764c92914247",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d61e9781d8cf38bc",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#008bbf",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#2196f3",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#2196f3",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#2196f3",
+                    "edited": true
+                },
+                "page-backgroundColor": {
+                    "value": "#f5f5f5",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#303f9f",
+                    "edited": true
+                },
+                "group-textColor": {
+                    "value": "#ffffff",
+                    "edited": true
+                },
+                "group-borderColor": {
+                    "value": "#e0e0e0",
+                    "edited": true
+                },
+                "group-backgroundColor": {
+                    "value": "#e0e0e0",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#2196f3",
+                    "edited": true
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "KYS Website",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 5,
+                "py": 5
+            }
+        }
+    },
+    {
+        "id": "baed2b5fea5cbfb2",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b1f263605ac770b2",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1988c3f1a1dac9b4",
+        "type": "ui_group",
+        "name": "Header",
+        "tab": "b1f263605ac770b2",
+        "order": 1,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "692502b42302f22d",
+        "type": "ui_tab",
+        "name": "User Authentication",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "9dda09625be00e71",
+        "type": "ui_group",
+        "name": "Login",
+        "tab": "692502b42302f22d",
+        "order": 1,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f902a277c89b59fe",
+        "type": "ui_group",
+        "name": "Signup",
+        "tab": "692502b42302f22d",
+        "order": 2,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "93cde0ec046c2221",
+        "type": "ui_tab",
+        "name": "Menu",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "623b99df28c25e02",
+        "type": "ui_group",
+        "name": "High security mode",
+        "tab": "93cde0ec046c2221",
+        "order": 1,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "29ef66a7043bc814",
+        "type": "ui_group",
+        "name": "Internal Environment",
+        "tab": "93cde0ec046c2221",
+        "order": 2,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8d3b3ef0511411c5",
+        "type": "ui_tab",
+        "name": "Suspicious Activities",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3926e6e4e7b72e67",
+        "type": "ui_group",
+        "name": "Placeholder",
+        "tab": "8d3b3ef0511411c5",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bc1bbec7c525b6b8",
+        "type": "ui_group",
+        "name": "Fire and toxic gas",
+        "tab": "93cde0ec046c2221",
+        "order": 3,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0370849dbb064aa3",
+        "type": "ui_text",
+        "z": "70d1edf009669b1f",
+        "group": "1988c3f1a1dac9b4",
+        "order": 1,
+        "width": "7",
+        "height": "4",
+        "name": "",
+        "label": "",
+        "format": "<div style=\"text-align: center;\"><b>{{msg.payload}}</b></div>",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "50",
+        "color": "#000000",
+        "x": 470,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e7317c0343da667e",
+        "type": "inject",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "WELCOME TO KYS WEBSITE",
+        "payloadType": "str",
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "0370849dbb064aa3"
+            ]
+        ]
+    },
+    {
+        "id": "cf235b7984bf1122",
+        "type": "ui_text",
+        "z": "70d1edf009669b1f",
+        "group": "1988c3f1a1dac9b4",
+        "order": 2,
+        "width": "7",
+        "height": "2",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "30",
+        "color": "#000000",
+        "x": 470,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6ca36d614c894e25",
+        "type": "inject",
+        "z": "70d1edf009669b1f",
+        "name": "log in prompt",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Let's get you logged in",
+        "payloadType": "str",
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "cf235b7984bf1122"
+            ]
+        ]
+    },
+    {
+        "id": "03079d42b340b5b4",
+        "type": "ui_button",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "group": "1988c3f1a1dac9b4",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Log In",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "button",
+        "icon": "",
+        "payload": "{\"tab\":\"User Authentication\",\"group\":{\"hide\":[\"User_Authentication_Signup\"],\"show\":[\"User_Authentication_Login\"]}}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "fead7a7d4aa6bd7b"
+            ]
+        ]
+    },
+    {
+        "id": "3519aae4d347acd9",
+        "type": "ui_button",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "group": "1988c3f1a1dac9b4",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Sign Up",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "button",
+        "icon": "",
+        "payload": "{\"tab\":\"User Authentication\",\"group\":{\"hide\":[\"User_Authentication_Login\"],\"show\":[\"User_Authentication_Signup\"]}}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "1e18d3f72fc85289"
+            ]
+        ]
+    },
+    {
+        "id": "01af794db3cf4c44",
+        "type": "ui_template",
+        "z": "70d1edf009669b1f",
+        "group": "1988c3f1a1dac9b4",
+        "name": "button formater",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    .nr-dashboard-group {\n        display: flex;\n        justify-content: center;\n        width: auto;\n    }\n\n    /* Increase the font size of the button text */\n    .nr-dashboard-button .md-button {\n        font-size: 20px;\n        /* Adjust the size as needed */\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fead7a7d4aa6bd7b",
+        "type": "ui_ui_control",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "events": "all",
+        "x": 420,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1e18d3f72fc85289",
+        "type": "ui_ui_control",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "events": "all",
+        "x": 420,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77f9d30709e26941",
+        "type": "ui_form",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "label": "Log In",
+        "group": "9dda09625be00e71",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Email",
+                "value": "Email",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Password",
+                "value": "Password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "Email": "",
+            "Password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fa2b20ba04a59b9",
+        "type": "ui_form",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "label": "Sign Up",
+        "group": "f902a277c89b59fe",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Email",
+                "value": "Email",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Password",
+                "value": "Password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Confirm Password",
+                "value": "Confirm Password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "Email": "",
+            "Password": "",
+            "Confirm Password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f06ffc36552706ec",
+        "type": "ui_ui_control",
+        "z": "1f35d8070d08aa76",
+        "name": "go to signup",
+        "events": "all",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c506c74be55d506",
+        "type": "ui_button",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "group": "9dda09625be00e71",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Sign Up",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "button",
+        "icon": "",
+        "payload": "{\"group\":{\"hide\":[\"User_Authentication_Login\"],\"show\":[\"User_Authentication_Signup\"]}}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "f06ffc36552706ec"
+            ]
+        ]
+    },
+    {
+        "id": "df9845a4cfb37b58",
+        "type": "ui_ui_control",
+        "z": "1f35d8070d08aa76",
+        "name": "go to login",
+        "events": "all",
+        "x": 390,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bfa6ff8929752210",
+        "type": "ui_button",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "group": "f902a277c89b59fe",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Log In",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "button",
+        "icon": "",
+        "payload": "{\"group\":{\"hide\":[\"User_Authentication_Signup\"],\"show\":[\"User_Authentication_Login\"]}}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 210,
+        "y": 340,
+        "wires": [
+            [
+                "df9845a4cfb37b58"
+            ]
+        ]
+    },
+    {
+        "id": "08e6275376e3a9ac",
+        "type": "ui_text",
+        "z": "1f35d8070d08aa76",
+        "group": "9dda09625be00e71",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 510,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "48ff4fa98f406aa7",
+        "type": "inject",
+        "z": "1f35d8070d08aa76",
+        "name": "sign up prompt",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "New to the website?",
+        "payloadType": "str",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "08e6275376e3a9ac"
+            ]
+        ]
+    },
+    {
+        "id": "5a90d8b329f4e2c7",
+        "type": "ui_text",
+        "z": "1f35d8070d08aa76",
+        "group": "f902a277c89b59fe",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 490,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "abe696762881bb0e",
+        "type": "inject",
+        "z": "1f35d8070d08aa76",
+        "name": "log in prompt",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Already have an account?",
+        "payloadType": "str",
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "5a90d8b329f4e2c7"
+            ]
+        ]
+    },
+    {
+        "id": "ba85506955fe4ee1",
+        "type": "ui_button",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "group": "9dda09625be00e71",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Back",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Home\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "c3e1461b46bcd157"
+            ]
+        ]
+    },
+    {
+        "id": "c3e1461b46bcd157",
+        "type": "ui_ui_control",
+        "z": "1f35d8070d08aa76",
+        "name": "go to home",
+        "events": "all",
+        "x": 890,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d859b8d2c607284b",
+        "type": "ui_button",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "group": "f902a277c89b59fe",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Back",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Home\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "c3e1461b46bcd157"
+            ]
+        ]
+    },
+    {
+        "id": "c9a7b6d177094cac",
+        "type": "ui_text",
+        "z": "d4bb2d7a23165e78",
+        "group": "623b99df28c25e02",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "25",
+        "color": "#000000",
+        "x": 370,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ba3b0143f6660df7",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "Button prompt",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Toggle high security mode",
+        "payloadType": "str",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "c9a7b6d177094cac"
+            ]
+        ]
+    },
+    {
+        "id": "ffc050f7664b1e32",
+        "type": "ui_button",
+        "z": "d4bb2d7a23165e78",
+        "name": "High security mode",
+        "group": "623b99df28c25e02",
+        "order": 2,
+        "width": "7",
+        "height": "5",
+        "passthru": false,
+        "label": "{{msg.label}}",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "{{msg.bgcolor}}",
+        "className": "big_button",
+        "icon": "",
+        "payload": "toggle",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "47af925b31febc14"
+            ]
+        ]
+    },
+    {
+        "id": "61fad74417921219",
+        "type": "ui_template",
+        "z": "d4bb2d7a23165e78",
+        "group": "623b99df28c25e02",
+        "name": "Big button template",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    /* Increase the font size of the button text */\n    .nr-dashboard-button[node-class=\"big_button\"] .md-button {\n    font-size: 30px;\n    /* Adjust the size as needed */\n    white-space: pre-line; /* Allows line breaks */\n    text-align: center; /* Center-align text */\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "47af925b31febc14",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "toggle logic",
+        "func": "if (msg.payload === 'toggle') {\n    let newState = context.get('state') || 'off';\n    let buttonMsg = {};\n    let notificationMsg = {};\n\n    if (newState === 'off') {\n        buttonMsg = {\n            label: 'High security mode: ON',\n            bgcolor: 'green',\n        };\n        notificationMsg = {\n            payload: 'High security mode: ON'\n        };\n        context.set('state', 'on');\n    }\n    else {\n        buttonMsg = {\n            label: 'High security mode: OFF',\n            bgcolor: 'rgb(33, 150, 243)',\n        };\n        notificationMsg = {\n            payload: 'High security mode: OFF'\n        };\n        context.set('state', 'off');\n    }\n\n    return [buttonMsg, notificationMsg];\n}\nreturn [null, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "ffc050f7664b1e32"
+            ],
+            [
+                "6ec4200d7e68b3c2"
+            ]
+        ]
+    },
+    {
+        "id": "6ec4200d7e68b3c2",
+        "type": "ui_toast",
+        "z": "d4bb2d7a23165e78",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "toggle notification",
+        "x": 630,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6b8237670c27bde7",
+        "type": "ui_gauge",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "group": "29ef66a7043bc814",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 320,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "eb25a83d81a38cc2",
+        "type": "ui_text",
+        "z": "d4bb2d7a23165e78",
+        "group": "29ef66a7043bc814",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperature",
+        "format": "{{msg.payload.toFixed(2) + \" °C\"}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 670,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "b3a0c0faab0332d5",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "placeholder",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "28.555555555",
+        "payloadType": "num",
+        "x": 510,
+        "y": 700,
+        "wires": [
+            [
+                "eb25a83d81a38cc2"
+            ]
+        ]
+    },
+    {
+        "id": "24a113a8e529b636",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "placeholder",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "87",
+        "payloadType": "num",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "6b8237670c27bde7"
+            ]
+        ]
+    },
+    {
+        "id": "d62d7169a0a11849",
+        "type": "ui_text",
+        "z": "d4bb2d7a23165e78",
+        "group": "29ef66a7043bc814",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#000000",
+        "x": 390,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "8c018c0d87058690",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "group title",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Internal Environment",
+        "payloadType": "str",
+        "x": 260,
+        "y": 620,
+        "wires": [
+            [
+                "d62d7169a0a11849"
+            ]
+        ]
+    },
+    {
+        "id": "8bcba8cc0e91d9e5",
+        "type": "ui_text",
+        "z": "d4bb2d7a23165e78",
+        "group": "29ef66a7043bc814",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperature",
+        "format": "{{msg.payload.toFixed(2) + \" °F\"}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 670,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "18c1e5d79fa2b986",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "placeholder",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "83.400",
+        "payloadType": "num",
+        "x": 510,
+        "y": 760,
+        "wires": [
+            [
+                "8bcba8cc0e91d9e5"
+            ]
+        ]
+    },
+    {
+        "id": "e8cc649b8d66723c",
+        "type": "comment",
+        "z": "d4bb2d7a23165e78",
+        "name": "High security mode toggle button",
+        "info": "",
+        "x": 450,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "199bf7d60104daae",
+        "type": "comment",
+        "z": "d4bb2d7a23165e78",
+        "name": "Temp & Humidity",
+        "info": "",
+        "x": 220,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "2e8fbf2286542d24",
+        "type": "ui_button",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "group": "623b99df28c25e02",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "View suspicious activities",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Suspicious Activities\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 250,
+        "y": 340,
+        "wires": [
+            [
+                "d1b727dfb0a166b7"
+            ]
+        ]
+    },
+    {
+        "id": "d1b727dfb0a166b7",
+        "type": "ui_ui_control",
+        "z": "d4bb2d7a23165e78",
+        "name": "View sus act",
+        "events": "all",
+        "x": 470,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a707700e9a75a14",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "placeholder",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "123.45678",
+        "payloadType": "num",
+        "x": 230,
+        "y": 1020,
+        "wires": [
+            [
+                "d632935ff5f9197b"
+            ]
+        ]
+    },
+    {
+        "id": "f44426d4efbb4846",
+        "type": "ui_text",
+        "z": "d4bb2d7a23165e78",
+        "group": "bc1bbec7c525b6b8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#000000",
+        "x": 370,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "d845b74bcaa12640",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "group title",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Fire/Toxic gas hazard",
+        "payloadType": "str",
+        "x": 240,
+        "y": 960,
+        "wires": [
+            [
+                "f44426d4efbb4846"
+            ]
+        ]
+    },
+    {
+        "id": "a7b0a56c8eea1470",
+        "type": "ui_text",
+        "z": "d4bb2d7a23165e78",
+        "group": "bc1bbec7c525b6b8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Risk of fire",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 570,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "0874ca2dc3e6b098",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "placeholder",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "28.55555555",
+        "payloadType": "num",
+        "x": 230,
+        "y": 1080,
+        "wires": [
+            [
+                "6800d016375dc06d"
+            ]
+        ]
+    },
+    {
+        "id": "3b09cf228b85076c",
+        "type": "ui_gauge",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "group": "bc1bbec7c525b6b8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Toxic gas concentration",
+        "label": "PPM",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "100",
+        "seg2": "500",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "d632935ff5f9197b",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "format value",
+        "func": "// Get the input value from the message payload\nvar value = msg.payload;\n\n// Format the value to 3 decimal places\nvar formattedValue = value.toFixed(3);\n\n// Set the formatted value in the message payload\nmsg.payload = formattedValue;\n\n// Return the message object\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1020,
+        "wires": [
+            [
+                "3b09cf228b85076c"
+            ]
+        ]
+    },
+    {
+        "id": "6800d016375dc06d",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "RIsk analysis",
+        "func": "// Get the temperature value from the message payload\nvar temperature = msg.payload;\n\n// Define thresholds for risk levels\nvar lowThreshold = 30; \nvar mediumThreshold = 50;\n\n// Determine the risk level based on the temperature\nvar riskLevel;\n\nif (temperature < lowThreshold) {\n    riskLevel = \"LOW\";\n} else if (temperature >= lowThreshold && temperature < mediumThreshold) {\n    riskLevel = \"MEDIUM\";\n} else {\n    riskLevel = \"HIGH\";\n}\n\n// Set the risk level in the message payload\nmsg.payload = riskLevel;\n\n// Return the message object\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1080,
+        "wires": [
+            [
+                "a7b0a56c8eea1470"
+            ]
+        ]
+    },
+    {
+        "id": "cce10ae8f56c5ee6",
+        "type": "ui_media",
+        "z": "f658764c92914247",
+        "group": "3926e6e4e7b72e67",
+        "name": "PLaceholder",
+        "width": 0,
+        "height": 0,
+        "order": 0,
+        "category": "Placeholders",
+        "file": "placeholder1.png",
+        "layout": "adjust",
+        "showcontrols": true,
+        "loop": false,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 590,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]
