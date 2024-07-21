@@ -2,7 +2,10 @@
     "name": "KYS_ROOM_SYSTEM",
     "description": "Finals project for IOT 101 course",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "node-red-contrib-ui-media": "1.2.0",
+        "node-red-dashboard": "3.6.5"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flows.json",
