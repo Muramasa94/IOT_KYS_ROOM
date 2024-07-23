@@ -468,6 +468,22 @@
         ]
     },
     {
+        "id": "f185573ca712de2f",
+        "type": "debug",
+        "z": "70d1edf009669b1f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 140,
+        "wires": []
+    },
+    {
         "id": "77f9d30709e26941",
         "type": "ui_form",
         "z": "1f35d8070d08aa76",
