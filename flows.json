@@ -275,6 +275,37 @@
         "className": ""
     },
     {
+        "id": "f657e76c43d16019",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.mqtt-dashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "0370849dbb064aa3",
         "type": "ui_text",
         "z": "70d1edf009669b1f",
@@ -966,7 +997,7 @@
         "gtype": "wave",
         "title": "Humidity",
         "label": "%",
-        "format": "{{value}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -999,59 +1030,9 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 670,
+        "x": 750,
         "y": 700,
         "wires": []
-    },
-    {
-        "id": "b3a0c0faab0332d5",
-        "type": "inject",
-        "z": "d4bb2d7a23165e78",
-        "name": "placeholder",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "28.555555555",
-        "payloadType": "num",
-        "x": 510,
-        "y": 700,
-        "wires": [
-            [
-                "eb25a83d81a38cc2"
-            ]
-        ]
-    },
-    {
-        "id": "24a113a8e529b636",
-        "type": "inject",
-        "z": "d4bb2d7a23165e78",
-        "name": "placeholder",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "87",
-        "payloadType": "num",
-        "x": 150,
-        "y": 700,
-        "wires": [
-            [
-                "6b8237670c27bde7"
-            ]
-        ]
     },
     {
         "id": "d62d7169a0a11849",
@@ -1096,52 +1077,6 @@
         "wires": [
             [
                 "d62d7169a0a11849"
-            ]
-        ]
-    },
-    {
-        "id": "8bcba8cc0e91d9e5",
-        "type": "ui_text",
-        "z": "d4bb2d7a23165e78",
-        "group": "29ef66a7043bc814",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Temperature",
-        "format": "{{msg.payload.toFixed(2) + \" °F\"}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 670,
-        "y": 760,
-        "wires": []
-    },
-    {
-        "id": "18c1e5d79fa2b986",
-        "type": "inject",
-        "z": "d4bb2d7a23165e78",
-        "name": "placeholder",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "83.400",
-        "payloadType": "num",
-        "x": 510,
-        "y": 760,
-        "wires": [
-            [
-                "8bcba8cc0e91d9e5"
             ]
         ]
     },
@@ -1387,6 +1322,48 @@
         "wires": [
             [
                 "a7b0a56c8eea1470"
+            ]
+        ]
+    },
+    {
+        "id": "87772061674819ff",
+        "type": "mqtt in",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "topic": "/22127131/Humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f657e76c43d16019",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "6b8237670c27bde7"
+            ]
+        ]
+    },
+    {
+        "id": "88b34d16578056c4",
+        "type": "mqtt in",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "topic": "/22127131/Temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f657e76c43d16019",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 540,
+        "y": 700,
+        "wires": [
+            [
+                "eb25a83d81a38cc2"
             ]
         ]
     },
