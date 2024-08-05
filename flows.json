@@ -948,7 +948,7 @@
         "type": "function",
         "z": "d4bb2d7a23165e78",
         "name": "toggle logic",
-        "func": "if (msg.payload === 'toggle') {\n    let newState = context.get('state') || 'off';\n    let buttonMsg = {};\n    let notificationMsg = {};\n\n    if (newState === 'off') {\n        buttonMsg = {\n            label: 'High security mode: ON',\n            bgcolor: 'green',\n        };\n        notificationMsg = {\n            payload: 'High security mode: ON'\n        };\n        context.set('state', 'on');\n    }\n    else {\n        buttonMsg = {\n            label: 'High security mode: OFF',\n            bgcolor: 'rgb(33, 150, 243)',\n        };\n        notificationMsg = {\n            payload: 'High security mode: OFF'\n        };\n        context.set('state', 'off');\n    }\n\n    return [buttonMsg, notificationMsg];\n}\nreturn [null, null];",
+        "func": "if (msg.payload === 'toggle') {\n    let newState = context.get('state') || 'off';\n    let buttonMsg = {};\n    let notificationMsg = {};\n\n    if (newState === 'off') {\n        buttonMsg = {\n            label: 'High security mode: ON',\n            bgcolor: 'green',\n        };\n        notificationMsg = {\n            payload: 'High security mode: ON'\n        };\n        context.set('state', 'on');\n    }\n    else {\n        buttonMsg = {\n            label: 'High security mode: OFF',\n            bgcolor: 'rgb(33, 150, 243)',\n        };\n        notificationMsg = {\n            payload: 'High security mode: OFF'\n        };\n        context.set('state', 'off');\n    }\n    return [buttonMsg, notificationMsg];\n}\nreturn [null, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -962,7 +962,8 @@
                 "ffc050f7664b1e32"
             ],
             [
-                "6ec4200d7e68b3c2"
+                "6ec4200d7e68b3c2",
+                "561b04f92c7d3006"
             ]
         ]
     },
@@ -1366,6 +1367,24 @@
                 "eb25a83d81a38cc2"
             ]
         ]
+    },
+    {
+        "id": "561b04f92c7d3006",
+        "type": "mqtt out",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "topic": "/22127131/highSecurityToggle",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f657e76c43d16019",
+        "x": 750,
+        "y": 340,
+        "wires": []
     },
     {
         "id": "cce10ae8f56c5ee6",
