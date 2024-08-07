@@ -25,7 +25,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 int dhtPin = 23;
 DHT dht(dhtPin, DHT11);
 
-// LED: 4
+// LED: 5
 int ledPin = 5;
 // photoRes: 34
 int photoresistorPin = 34;
@@ -34,6 +34,18 @@ int photoresistorPin = 34;
 int pirPin = 27;
 // Buzzer: 4
 int buzzerPin = 4;
+
+// relay: 19
+int relayPin = 19;
+
+// flame sensor: 35
+int flamePin = 13;
+
+// MQ2: 35
+int mq2Pin = 35;
+
+// reed: 14
+int reedPin = 14;
 
 void wifiConnect() {
   WiFi.begin(ssid, password);
@@ -98,6 +110,11 @@ void setup() {
   pinMode(photoresistorPin, INPUT);
   pinMode(pirPin, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(pirPin), detect_pir, RISING);
+
+  pinMode(relayPin, OUTPUT);
+  pinMode(flamePin, INPUT);
+  pinMode(mq2Pin, INPUT);
+  pinMode(reedPin, INPUT);
 }
 
 void loop() {
@@ -111,6 +128,11 @@ void loop() {
   //***Publish data to MQTT Server***
   float h = dht.readHumidity();
   float t = dht.readTemperature();
+
+  // control relay based on h value
+  if (h < 50)
+    digitalWrite(relayPin, HIGH);
+  else digitalWrite(relayPin, LOW);
 
   // temp and humidity
   lcd.setCursor(0, 0);
@@ -136,9 +158,38 @@ void loop() {
   mqttClient.publish("/22127131/Humidity", h_buffer);
   mqttClient.publish("/22127131/Temperature", t_buffer);
   
-
   // read brightness and adjust led output
   photores_led(ledPin, photoresistorPin);
+
+  // detect flame
+  int flame = digitalRead(flamePin);
+  if (flame == HIGH) {
+    Serial.println("no fire");
+    mqttClient.publish("/22127131/Fire", "no");
+  } else {
+    Serial.println("FIRE!!!!!");
+    tone(buzzerPin, 1500, 750);
+    mqttClient.publish("/22127131/Fire", "YES!!!!!");
+  }
+
+  // read gas concentration value
+  int gasVal = analogRead(mq2Pin);
+  Serial.print("Toxic gas concentration: ");
+  Serial.println(gasVal);
+  char g_buffer[10];
+  dtostrf(gasVal, 6, 0, g_buffer);
+  mqttClient.publish("/22127131/Gas", g_buffer);
+
+  // detect opened door
+  int door = digitalRead(reedPin);
+  if (door == HIGH) {
+    Serial.println("Door closed");
+    //mqttClient.publish("/22127131/Door", "closed");
+  } else {
+    Serial.println("Door opened");
+    tone(buzzerPin, 2000, 750);
+    //mqttClient.publish("/22127131/Door", "opened");
+  }
 
   delay(1000);
   // test comment
@@ -146,7 +197,7 @@ void loop() {
 
 void photores_led(int ledPin, int photoresistorPin) {
   int sensorValue = analogRead(photoresistorPin); // Read the photoresistor value
-  int ledBrightness = map(sensorValue, 0, 4095, 255, 0); // Map the sensor value to LED brightness (inverted)
+  int ledBrightness = map(sensorValue, 0, 120, 255, 0); // Map the sensor value to LED brightness (inverted)
 
   analogWrite(ledPin, ledBrightness); // Set the LED brightness
 
@@ -160,6 +211,6 @@ void photores_led(int ledPin, int photoresistorPin) {
 void detect_pir() {
   if (HIGH_SECURITY_MODE) {
     Serial.println("Motion detected!");
-    tone(buzzerPin, 1000, 1000);
+    tone(buzzerPin, 1000, 2000);
   }
 }
