@@ -1142,31 +1142,6 @@
         ]
     },
     {
-        "id": "6a707700e9a75a14",
-        "type": "inject",
-        "z": "d4bb2d7a23165e78",
-        "name": "placeholder",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "123.45678",
-        "payloadType": "num",
-        "x": 230,
-        "y": 1020,
-        "wires": [
-            [
-                "d632935ff5f9197b"
-            ]
-        ]
-    },
-    {
         "id": "f44426d4efbb4846",
         "type": "ui_text",
         "z": "d4bb2d7a23165e78",
@@ -1221,7 +1196,7 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Risk of fire",
+        "label": "FIRE",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
@@ -1229,34 +1204,9 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 570,
+        "x": 450,
         "y": 1080,
         "wires": []
-    },
-    {
-        "id": "0874ca2dc3e6b098",
-        "type": "inject",
-        "z": "d4bb2d7a23165e78",
-        "name": "placeholder",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "28.55555555",
-        "payloadType": "num",
-        "x": 230,
-        "y": 1080,
-        "wires": [
-            [
-                "6800d016375dc06d"
-            ]
-        ]
     },
     {
         "id": "3b09cf228b85076c",
@@ -1272,59 +1222,19 @@
         "label": "PPM",
         "format": "{{value}}",
         "min": 0,
-        "max": "1000",
+        "max": "5000",
         "colors": [
             "#00b500",
             "#e6e600",
             "#ca3838"
         ],
-        "seg1": "100",
-        "seg2": "500",
+        "seg1": "1000",
+        "seg2": "3000",
         "diff": false,
         "className": "",
-        "x": 610,
+        "x": 510,
         "y": 1020,
         "wires": []
-    },
-    {
-        "id": "d632935ff5f9197b",
-        "type": "function",
-        "z": "d4bb2d7a23165e78",
-        "name": "format value",
-        "func": "// Get the input value from the message payload\nvar value = msg.payload;\n\n// Format the value to 3 decimal places\nvar formattedValue = value.toFixed(3);\n\n// Set the formatted value in the message payload\nmsg.payload = formattedValue;\n\n// Return the message object\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 1020,
-        "wires": [
-            [
-                "3b09cf228b85076c"
-            ]
-        ]
-    },
-    {
-        "id": "6800d016375dc06d",
-        "type": "function",
-        "z": "d4bb2d7a23165e78",
-        "name": "RIsk analysis",
-        "func": "// Get the temperature value from the message payload\nvar temperature = msg.payload;\n\n// Define thresholds for risk levels\nvar lowThreshold = 30; \nvar mediumThreshold = 50;\n\n// Determine the risk level based on the temperature\nvar riskLevel;\n\nif (temperature < lowThreshold) {\n    riskLevel = \"LOW\";\n} else if (temperature >= lowThreshold && temperature < mediumThreshold) {\n    riskLevel = \"MEDIUM\";\n} else {\n    riskLevel = \"HIGH\";\n}\n\n// Set the risk level in the message payload\nmsg.payload = riskLevel;\n\n// Return the message object\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 1080,
-        "wires": [
-            [
-                "a7b0a56c8eea1470"
-            ]
-        ]
     },
     {
         "id": "87772061674819ff",
@@ -1385,6 +1295,48 @@
         "x": 750,
         "y": 340,
         "wires": []
+    },
+    {
+        "id": "e607975029cbff1b",
+        "type": "mqtt in",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "topic": "/22127131/Fire",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f657e76c43d16019",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1080,
+        "wires": [
+            [
+                "a7b0a56c8eea1470"
+            ]
+        ]
+    },
+    {
+        "id": "d89e3178713a35cc",
+        "type": "mqtt in",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "topic": "/22127131/Gas",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f657e76c43d16019",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1020,
+        "wires": [
+            [
+                "3b09cf228b85076c"
+            ]
+        ]
     },
     {
         "id": "cce10ae8f56c5ee6",
