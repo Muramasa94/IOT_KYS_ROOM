@@ -130,7 +130,7 @@ void loop() {
   float t = dht.readTemperature();
 
   // control relay based on h value
-  if (h < 50)
+  if (h < 60)
     digitalWrite(relayPin, HIGH);
   else digitalWrite(relayPin, LOW);
 
@@ -183,11 +183,12 @@ void loop() {
   // detect opened door
   int door = digitalRead(reedPin);
   if (door == HIGH) {
-    Serial.println("Door closed");
+    Serial.println("Door opened");
+    if (HIGH_SECURITY_MODE)
+      tone(buzzerPin, 2000, 750);
     //mqttClient.publish("/22127131/Door", "closed");
   } else {
-    Serial.println("Door opened");
-    tone(buzzerPin, 2000, 750);
+    Serial.println("Door closed");
     //mqttClient.publish("/22127131/Door", "opened");
   }
 
