@@ -963,7 +963,8 @@
             ],
             [
                 "6ec4200d7e68b3c2",
-                "561b04f92c7d3006"
+                "561b04f92c7d3006",
+                "8900825439f940aa"
             ]
         ]
     },
@@ -1205,7 +1206,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 450,
-        "y": 1080,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1222,13 +1223,13 @@
         "label": "PPM",
         "format": "{{value}}",
         "min": 0,
-        "max": "5000",
+        "max": "4095",
         "colors": [
             "#00b500",
             "#e6e600",
             "#ca3838"
         ],
-        "seg1": "1000",
+        "seg1": "1500",
         "seg2": "3000",
         "diff": false,
         "className": "",
@@ -1310,10 +1311,11 @@
         "rh": 0,
         "inputs": 0,
         "x": 200,
-        "y": 1080,
+        "y": 1160,
         "wires": [
             [
-                "a7b0a56c8eea1470"
+                "a7b0a56c8eea1470",
+                "61dafec0d4908f99"
             ]
         ]
     },
@@ -1334,8 +1336,127 @@
         "y": 1020,
         "wires": [
             [
-                "3b09cf228b85076c"
+                "3b09cf228b85076c",
+                "8c0ce92ce5194c83"
             ]
+        ]
+    },
+    {
+        "id": "8900825439f940aa",
+        "type": "http request",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://www.pushsafer.com/api?k=xUszs3ICNpeFR4LxfquP&m={{payload}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61dafec0d4908f99",
+        "type": "switch",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "YES!!!!!",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "no",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 1220,
+        "wires": [
+            [
+                "73f911fcd0341abd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "73f911fcd0341abd",
+        "type": "http request",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://www.pushsafer.com/api?k=xUszs3ICNpeFR4LxfquP&m=YOUR%20HOUSE%20IS%20ON%20FIRE!!!!!!",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c0ce92ce5194c83",
+        "type": "switch",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "818fde57aba35349",
+        "type": "http request",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 1080,
+        "wires": [
+            []
         ]
     },
     {
