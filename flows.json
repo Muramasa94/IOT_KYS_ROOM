@@ -306,6 +306,45 @@
         "sessionExpiry": ""
     },
     {
+        "id": "f771fd65e8288d7a",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "8d3b3ef0511411c5",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "003679c57e7c999b",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "8d3b3ef0511411c5",
+        "order": 3,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f7a55b8496ef909b",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "8d3b3ef0511411c5",
+        "order": 4,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ec1fe2d70765080b",
+        "type": "firebase config",
+        "firebaseurl": "kys-database-837f1-default-rtdb",
+        "loginType": "none"
+    },
+    {
         "id": "0370849dbb064aa3",
         "type": "ui_text",
         "z": "70d1edf009669b1f",
@@ -551,8 +590,8 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 130,
-        "y": 60,
+        "x": 730,
+        "y": 580,
         "wires": [
             []
         ]
@@ -602,10 +641,12 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 120,
-        "y": 280,
+        "x": 560,
+        "y": 460,
         "wires": [
-            []
+            [
+                "3a5c981ce8a2a0c5"
+            ]
         ]
     },
     {
@@ -849,6 +890,110 @@
         ]
     },
     {
+        "id": "da30f126136e212f",
+        "type": "firebase modify",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "firebaseconfig": "ec1fe2d70765080b",
+        "childpath": "Authentication",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 590,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "92a5d2f2bf7dae94",
+        "type": "debug",
+        "z": "1f35d8070d08aa76",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 250,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c95aadeca4287107",
+        "type": "firebase.on",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "firebaseconfig": "ec1fe2d70765080b",
+        "childpath": "Authentication",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "a102552620981f26"
+            ]
+        ]
+    },
+    {
+        "id": "a102552620981f26",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 1",
+        "func": "// Assume msg.payload contains the data from Firebase\nlet data = msg.payload;\nlet credentials = [];\n\nfor (let key in data) {\n    if (data.hasOwnProperty(key)) {\n        let email = data[key]['Email'];\n        let password = data[key]['Password'];\n        if (email && password) {\n            credentials.push({ 'Email': email, 'Password': password });\n        }\n    }\n}\n\nmsg.credentials = credentials;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 520,
+        "wires": [
+            [
+                "7936fc4149c70de8"
+            ]
+        ]
+    },
+    {
+        "id": "3a5c981ce8a2a0c5",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 2",
+        "func": "msg.signUp = msg.signUpData;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7936fc4149c70de8",
+        "type": "debug",
+        "z": "1f35d8070d08aa76",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 520,
+        "wires": []
+    },
+    {
         "id": "c9a7b6d177094cac",
         "type": "ui_text",
         "z": "d4bb2d7a23165e78",
@@ -963,7 +1108,8 @@
             ],
             [
                 "6ec4200d7e68b3c2",
-                "561b04f92c7d3006"
+                "561b04f92c7d3006",
+                "8900825439f940aa"
             ]
         ]
     },
@@ -1205,7 +1351,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 450,
-        "y": 1080,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1222,13 +1368,13 @@
         "label": "PPM",
         "format": "{{value}}",
         "min": 0,
-        "max": "5000",
+        "max": "4095",
         "colors": [
             "#00b500",
             "#e6e600",
             "#ca3838"
         ],
-        "seg1": "1000",
+        "seg1": "1500",
         "seg2": "3000",
         "diff": false,
         "className": "",
@@ -1310,10 +1456,11 @@
         "rh": 0,
         "inputs": 0,
         "x": 200,
-        "y": 1080,
+        "y": 1160,
         "wires": [
             [
-                "a7b0a56c8eea1470"
+                "a7b0a56c8eea1470",
+                "61dafec0d4908f99"
             ]
         ]
     },
@@ -1334,29 +1481,161 @@
         "y": 1020,
         "wires": [
             [
-                "3b09cf228b85076c"
+                "3b09cf228b85076c",
+                "8c0ce92ce5194c83"
             ]
         ]
     },
     {
-        "id": "cce10ae8f56c5ee6",
-        "type": "ui_media",
+        "id": "8900825439f940aa",
+        "type": "http request",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://www.pushsafer.com/api?k=xUszs3ICNpeFR4LxfquP&m={{payload}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61dafec0d4908f99",
+        "type": "switch",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "YES!!!!!",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "no",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 1220,
+        "wires": [
+            [
+                "73f911fcd0341abd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "73f911fcd0341abd",
+        "type": "http request",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://www.pushsafer.com/api?k=xUszs3ICNpeFR4LxfquP&m=YOUR%20HOUSE%20IS%20ON%20FIRE!!!!!!",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c0ce92ce5194c83",
+        "type": "switch",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "818fde57aba35349",
+        "type": "http request",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30877591fc987179",
+        "type": "ui_iframe",
         "z": "f658764c92914247",
-        "group": "3926e6e4e7b72e67",
-        "name": "PLaceholder",
-        "width": 0,
-        "height": 0,
+        "group": "003679c57e7c999b",
+        "name": "",
         "order": 0,
-        "category": "Placeholders",
-        "file": "placeholder1.png",
-        "layout": "adjust",
-        "showcontrols": true,
-        "loop": false,
-        "onstart": false,
-        "scope": "local",
-        "tooltip": "",
-        "x": 590,
-        "y": 180,
+        "width": "8",
+        "height": "5",
+        "url": "https://thingspeak.com/channels/2621663/charts/1?api_key=PTEXQU2IMROB7A5L",
+        "origin": "*",
+        "scale": "100",
+        "x": 390,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a26af1a0d41b3dd1",
+        "type": "ui_iframe",
+        "z": "f658764c92914247",
+        "group": "f7a55b8496ef909b",
+        "name": "",
+        "order": 0,
+        "width": "8",
+        "height": "5",
+        "url": "https://thingspeak.com/channels/2621663/charts/2?api_key=PTEXQU2IMROB7A5L",
+        "origin": "*",
+        "scale": "100",
+        "x": 390,
+        "y": 380,
         "wires": [
             []
         ]
