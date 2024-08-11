@@ -345,6 +345,11 @@
         "loginType": "none"
     },
     {
+        "id": "240072d5eab0540f",
+        "type": "firebase admin",
+        "name": ""
+    },
+    {
         "id": "0370849dbb064aa3",
         "type": "ui_text",
         "z": "70d1edf009669b1f",
@@ -565,8 +570,8 @@
         "height": 0,
         "options": [
             {
-                "label": "Email",
-                "value": "Email",
+                "label": "Username",
+                "value": "Username",
                 "type": "text",
                 "required": true,
                 "rows": null
@@ -580,7 +585,7 @@
             }
         ],
         "formValue": {
-            "Email": "",
+            "Username": "",
             "Password": ""
         },
         "payload": "",
@@ -590,10 +595,12 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 730,
-        "y": 580,
+        "x": 200,
+        "y": 500,
         "wires": [
-            []
+            [
+                "9328754978532db5"
+            ]
         ]
     },
     {
@@ -608,8 +615,8 @@
         "height": 0,
         "options": [
             {
-                "label": "Email",
-                "value": "Email",
+                "label": "Username",
+                "value": "Username",
                 "type": "text",
                 "required": true,
                 "rows": null
@@ -620,19 +627,11 @@
                 "type": "password",
                 "required": true,
                 "rows": null
-            },
-            {
-                "label": "Confirm Password",
-                "value": "Confirm Password",
-                "type": "password",
-                "required": true,
-                "rows": null
             }
         ],
         "formValue": {
-            "Email": "",
-            "Password": "",
-            "Confirm Password": ""
+            "Username": "",
+            "Password": ""
         },
         "payload": "",
         "submit": "submit",
@@ -641,11 +640,12 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 560,
-        "y": 460,
+        "x": 200,
+        "y": 600,
         "wires": [
             [
-                "3a5c981ce8a2a0c5"
+                "49af8320557ff11c",
+                "bca7423bbc818aba"
             ]
         ]
     },
@@ -890,22 +890,6 @@
         ]
     },
     {
-        "id": "da30f126136e212f",
-        "type": "firebase modify",
-        "z": "1f35d8070d08aa76",
-        "name": "",
-        "firebaseconfig": "ec1fe2d70765080b",
-        "childpath": "Authentication",
-        "method": "push",
-        "value": "msg.payload",
-        "priority": "msg.priority",
-        "x": 590,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "92a5d2f2bf7dae94",
         "type": "debug",
         "z": "1f35d8070d08aa76",
@@ -922,76 +906,473 @@
         "wires": []
     },
     {
-        "id": "c95aadeca4287107",
-        "type": "firebase.on",
+        "id": "aa0972e6cada76c9",
+        "type": "Firestore in",
         "z": "1f35d8070d08aa76",
         "name": "",
-        "firebaseconfig": "ec1fe2d70765080b",
-        "childpath": "Authentication",
-        "atStart": true,
-        "eventType": "value",
-        "queries": [],
-        "x": 320,
-        "y": 520,
+        "collection": "Authentication",
+        "group": false,
+        "document": "",
+        "realtime": false,
+        "query": [
+            {
+                "where": {
+                    "field": "Username",
+                    "operation": "==",
+                    "value": "Username"
+                }
+            },
+            {
+                "where": {
+                    "field": "Password",
+                    "operation": "==",
+                    "value": "Password"
+                }
+            }
+        ],
+        "admin": "240072d5eab0540f",
+        "snapHandler": "",
+        "eject": false,
+        "x": 590,
+        "y": 500,
         "wires": [
             [
-                "a102552620981f26"
+                "2aa9f407335fa4b1"
             ]
         ]
     },
     {
-        "id": "a102552620981f26",
+        "id": "9328754978532db5",
         "type": "function",
         "z": "1f35d8070d08aa76",
         "name": "function 1",
-        "func": "// Assume msg.payload contains the data from Firebase\nlet data = msg.payload;\nlet credentials = [];\n\nfor (let key in data) {\n    if (data.hasOwnProperty(key)) {\n        let email = data[key]['Email'];\n        let password = data[key]['Password'];\n        if (email && password) {\n            credentials.push({ 'Email': email, 'Password': password });\n        }\n    }\n}\n\nmsg.credentials = credentials;\nreturn msg;\n",
+        "func": "msg.firestore =\n{\n  query : [\n      {where: [\"Password\", \"==\", msg.payload.Password]},\n      {where: [\"Username\", \"==\", msg.payload.Username]}\n  ]\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 720,
-        "y": 520,
+        "x": 390,
+        "y": 500,
         "wires": [
             [
-                "7936fc4149c70de8"
+                "aa0972e6cada76c9"
             ]
         ]
     },
     {
-        "id": "3a5c981ce8a2a0c5",
+        "id": "2aa9f407335fa4b1",
         "type": "function",
         "z": "1f35d8070d08aa76",
         "name": "function 2",
-        "func": "msg.signUp = msg.signUpData;\nreturn msg;",
+        "func": "if (typeof msg.payload === 'object' && msg.payload !== null && Object.keys(msg.payload).length === 0) {\n    // msg.payload is an empty object\n    msg.payload = \"false\"; // Set msg.payload to false\n} else {\n    // msg.payload is not an empty object or is not an object\n    msg.payload = \"true\"; // Set msg.payload to true\n}\nreturn msg; // Always return msg to continue the flow\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 720,
-        "y": 460,
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "8877777047b54915"
+            ]
+        ]
+    },
+    {
+        "id": "8877777047b54915",
+        "type": "switch",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 990,
+        "y": 500,
+        "wires": [
+            [
+                "acc535e3da8c75ca"
+            ],
+            [
+                "ee9599e0b8d58eb9"
+            ]
+        ]
+    },
+    {
+        "id": "acc535e3da8c75ca",
+        "type": "change",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 480,
+        "wires": [
+            [
+                "7d3b8a7671722a79"
+            ]
+        ]
+    },
+    {
+        "id": "7d3b8a7671722a79",
+        "type": "ui_ui_control",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "events": "all",
+        "x": 1380,
+        "y": 480,
         "wires": [
             []
         ]
     },
     {
-        "id": "7936fc4149c70de8",
-        "type": "debug",
+        "id": "ee9599e0b8d58eb9",
+        "type": "change",
         "z": "1f35d8070d08aa76",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 910,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Please try again!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 520,
+        "wires": [
+            [
+                "d680bca44ea9bfdd"
+            ]
+        ]
+    },
+    {
+        "id": "d680bca44ea9bfdd",
+        "type": "ui_toast",
+        "z": "1f35d8070d08aa76",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Error: Incorrect Username and/or Password",
+        "name": "",
+        "x": 1390,
         "y": 520,
         "wires": []
+    },
+    {
+        "id": "49af8320557ff11c",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 3",
+        "func": "msg.firestore =\n{\n  query : [\n      {where: [\"Password\", \"==\", msg.payload.Password]},\n      {where: [\"Username\", \"==\", msg.payload.Username]}\n  ]\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 600,
+        "wires": [
+            [
+                "873aed9de85d11fe"
+            ]
+        ]
+    },
+    {
+        "id": "873aed9de85d11fe",
+        "type": "Firestore in",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "collection": "Authentication",
+        "group": false,
+        "document": "",
+        "realtime": false,
+        "query": [
+            {
+                "where": {
+                    "field": "Username",
+                    "operation": "==",
+                    "value": "Username"
+                }
+            }
+        ],
+        "admin": "240072d5eab0540f",
+        "snapHandler": "",
+        "eject": false,
+        "x": 560,
+        "y": 600,
+        "wires": [
+            [
+                "e22713c3420b5ee0"
+            ]
+        ]
+    },
+    {
+        "id": "e22713c3420b5ee0",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 4",
+        "func": "if (typeof msg.payload === 'object' && msg.payload !== null && Object.keys(msg.payload).length === 0) {\n    // msg.payload is an empty object\n    msg.payload = \"false\"; // Set msg.payload to false\n} else {\n    // msg.payload is not an empty object or is not an object\n    msg.payload = \"true\"; // Set msg.payload to true\n}\nreturn msg; // Always return msg to continue the flow\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 600,
+        "wires": [
+            [
+                "ca372d1a453a9f3e"
+            ]
+        ]
+    },
+    {
+        "id": "ca372d1a453a9f3e",
+        "type": "switch",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 960,
+        "y": 600,
+        "wires": [
+            [
+                "e325ec1df14fb2f8"
+            ],
+            [
+                "c79689617715c703"
+            ]
+        ]
+    },
+    {
+        "id": "c79689617715c703",
+        "type": "change",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "auth",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 660,
+        "wires": [
+            [
+                "47c1dc4c1a138dc0"
+            ]
+        ]
+    },
+    {
+        "id": "e325ec1df14fb2f8",
+        "type": "change",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Please try again!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 580,
+        "wires": [
+            [
+                "e5a9e08507a01e2b"
+            ]
+        ]
+    },
+    {
+        "id": "e5a9e08507a01e2b",
+        "type": "ui_toast",
+        "z": "1f35d8070d08aa76",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Error: This Username has already existed!",
+        "name": "",
+        "x": 1390,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "bca7423bbc818aba",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 5",
+        "func": "flow.set('auth', msg.payload)\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "47c1dc4c1a138dc0",
+        "type": "Firestore out",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "collection": "Authentication",
+        "document": "",
+        "operation": "add",
+        "admin": "240072d5eab0540f",
+        "eject": false,
+        "x": 1370,
+        "y": 660,
+        "wires": [
+            [
+                "65281a4d0e8b2b0b"
+            ]
+        ]
+    },
+    {
+        "id": "65281a4d0e8b2b0b",
+        "type": "change",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1610,
+        "y": 660,
+        "wires": [
+            [
+                "08df7f452f01fbdd"
+            ]
+        ]
+    },
+    {
+        "id": "0d1879a3d6eb82c5",
+        "type": "ui_ui_control",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "events": "all",
+        "x": 2040,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "08df7f452f01fbdd",
+        "type": "change",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1840,
+        "y": 660,
+        "wires": [
+            [
+                "0d1879a3d6eb82c5"
+            ]
+        ]
     },
     {
         "id": "c9a7b6d177094cac",
