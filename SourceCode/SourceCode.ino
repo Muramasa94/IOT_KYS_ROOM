@@ -3,20 +3,24 @@
 #include "DHT.h"
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include <WiFiManager.h>
+#include "ThingSpeak.h"
+#include <FirebaseESP32.h>
 
 // High security mode toggle
 bool HIGH_SECURITY_MODE = false;
-
-// Wifi
-const char* ssid = "Kzm168";
-const char* password = "kzmdegozaru";
 
 //***Set server***
 const char* mqttServer = "broker.mqtt-dashboard.com"; 
 int port = 1883;
 
+//***Set WiFi credentials***
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
+
+// firebase api
+const char* firebaseHost = "https://kys-database-837f1-default-rtdb.firebaseio.com/";
+const char* firebaseSecret = "ivEgKvsKpJbuNI8yjxvLfmNLVs9Q3ulkJIeyxml0"
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 // SDA: 21
@@ -43,15 +47,18 @@ int flamePin = 13;
 
 // MQ2: 35
 int mq2Pin = 35;
+// RGB LED
+int redPin = 25;
+int greenPin = 26;
+int bluePin = 33;
 
 // reed: 14
 int reedPin = 14;
 
-void wifiConnect() {
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {}
-  Serial.println(" Connected!");
-}
+// cloud api
+const char* writeAPIKey = "HNLSDKYBBINAXE4A";
+const char* readAPIKey = "PTEXQU2IMROB7A5L";
+const unsigned long channelID = 2621663;
 
 void mqttConnect() {
   while(!mqttClient.connected()) {
@@ -101,7 +108,24 @@ void setup() {
 
   Serial.println();
   Serial.print("Connecting to WiFi");
-  wifiConnect();
+
+  //WiFiManager, Local intialization. Once its business is done, there is no need to keep it around
+  WiFiManager wm;
+  bool res;
+  res = wm.autoConnect("KYS_DEVICE"); // password protected ap
+  if(!res) {
+      Serial.println("Failed to connect");
+      // ESP.restart();
+  } 
+  else {
+      //if you get here you have connected to the WiFi    
+      Serial.println("connected...yeey :)");
+  }
+
+  // activate cloud api
+  ThingSpeak.begin(wifiClient);
+
+  //Set mqtt server
   mqttClient.setServer(mqttServer, port);
   mqttClient.setCallback(callback);
   mqttClient.setKeepAlive( 90 );
@@ -115,6 +139,9 @@ void setup() {
   pinMode(flamePin, INPUT);
   pinMode(mq2Pin, INPUT);
   pinMode(reedPin, INPUT);
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
 }
 
 void loop() {
@@ -128,6 +155,20 @@ void loop() {
   //***Publish data to MQTT Server***
   float h = dht.readHumidity();
   float t = dht.readTemperature();
+
+  // Only upload to ThingSpeak every 10 seconds (adjust as needed)
+  static unsigned long lastUploadTime = 0;
+  if (millis() - lastUploadTime > 10000) { // 10 seconds interval
+    ThingSpeak.setField(1, h);
+    ThingSpeak.setField(2, t);
+    int uploadRes = ThingSpeak.writeFields(channelID, writeAPIKey);
+    if (uploadRes == 200) {
+      Serial.println("Upload successful");
+    } else {
+      Serial.println("Upload failed");
+    }
+    lastUploadTime = millis(); // Update the last upload time
+  }
 
   // control relay based on h value
   if (h < 60)
@@ -176,6 +217,20 @@ void loop() {
   int gasVal = analogRead(mq2Pin);
   Serial.print("Toxic gas concentration: ");
   Serial.println(gasVal);
+  // set rgb led color based on gas concentration
+  if (gasVal > 3000) {
+    analogWrite(redPin, 255);
+    analogWrite(greenPin, 0);
+    analogWrite(bluePin, 0);
+  } else if (gasVal > 1500) {
+    analogWrite(redPin, 255);
+    analogWrite(greenPin, 255);
+    analogWrite(bluePin, 0);
+  } else {
+    analogWrite(redPin, 0);
+    analogWrite(greenPin, 255);
+    analogWrite(bluePin, 0);
+  }
   char g_buffer[10];
   dtostrf(gasVal, 6, 0, g_buffer);
   mqttClient.publish("/22127131/Gas", g_buffer);
@@ -198,7 +253,7 @@ void loop() {
 
 void photores_led(int ledPin, int photoresistorPin) {
   int sensorValue = analogRead(photoresistorPin); // Read the photoresistor value
-  int ledBrightness = map(sensorValue, 0, 120, 255, 0); // Map the sensor value to LED brightness (inverted)
+  int ledBrightness = map_brightness(sensorValue); // Map the sensor value to LED brightness
 
   analogWrite(ledPin, ledBrightness); // Set the LED brightness
 
@@ -213,5 +268,13 @@ void detect_pir() {
   if (HIGH_SECURITY_MODE) {
     Serial.println("Motion detected!");
     tone(buzzerPin, 1000, 2000);
+  }
+}
+
+int map_brightness(int sensorValue) {
+  if (sensorValue > 200) {
+    return 0;
+  } else {
+    return map(sensorValue, 0, 200, 255, 0);
   }
 }
