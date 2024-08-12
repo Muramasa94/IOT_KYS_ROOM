@@ -543,20 +543,51 @@
         ]
     },
     {
-        "id": "f185573ca712de2f",
-        "type": "debug",
+        "id": "0b7b3d4dcd0f9b19",
+        "type": "inject",
         "z": "70d1edf009669b1f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 680,
-        "y": 140,
-        "wires": []
+        "name": "Set global var",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 500,
+        "wires": [
+            [
+                "4a4934edd6beb0ba"
+            ]
+        ]
+    },
+    {
+        "id": "4a4934edd6beb0ba",
+        "type": "function",
+        "z": "70d1edf009669b1f",
+        "name": "Set high security mode to false",
+        "func": "global.set('HighSecurityMode', false);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 500,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "77f9d30709e26941",
@@ -906,42 +937,6 @@
         "wires": []
     },
     {
-        "id": "aa0972e6cada76c9",
-        "type": "Firestore in",
-        "z": "1f35d8070d08aa76",
-        "name": "",
-        "collection": "Authentication",
-        "group": false,
-        "document": "",
-        "realtime": false,
-        "query": [
-            {
-                "where": {
-                    "field": "Username",
-                    "operation": "==",
-                    "value": "Username"
-                }
-            },
-            {
-                "where": {
-                    "field": "Password",
-                    "operation": "==",
-                    "value": "Password"
-                }
-            }
-        ],
-        "admin": "240072d5eab0540f",
-        "snapHandler": "",
-        "eject": false,
-        "x": 590,
-        "y": 500,
-        "wires": [
-            [
-                "2aa9f407335fa4b1"
-            ]
-        ]
-    },
-    {
         "id": "9328754978532db5",
         "type": "function",
         "z": "1f35d8070d08aa76",
@@ -1120,35 +1115,6 @@
         ]
     },
     {
-        "id": "873aed9de85d11fe",
-        "type": "Firestore in",
-        "z": "1f35d8070d08aa76",
-        "name": "",
-        "collection": "Authentication",
-        "group": false,
-        "document": "",
-        "realtime": false,
-        "query": [
-            {
-                "where": {
-                    "field": "Username",
-                    "operation": "==",
-                    "value": "Username"
-                }
-            }
-        ],
-        "admin": "240072d5eab0540f",
-        "snapHandler": "",
-        "eject": false,
-        "x": 560,
-        "y": 600,
-        "wires": [
-            [
-                "e22713c3420b5ee0"
-            ]
-        ]
-    },
-    {
         "id": "e22713c3420b5ee0",
         "type": "function",
         "z": "1f35d8070d08aa76",
@@ -1293,24 +1259,6 @@
         ]
     },
     {
-        "id": "47c1dc4c1a138dc0",
-        "type": "Firestore out",
-        "z": "1f35d8070d08aa76",
-        "name": "",
-        "collection": "Authentication",
-        "document": "",
-        "operation": "add",
-        "admin": "240072d5eab0540f",
-        "eject": false,
-        "x": 1370,
-        "y": 660,
-        "wires": [
-            [
-                "65281a4d0e8b2b0b"
-            ]
-        ]
-    },
-    {
         "id": "65281a4d0e8b2b0b",
         "type": "change",
         "z": "1f35d8070d08aa76",
@@ -1371,6 +1319,89 @@
         "wires": [
             [
                 "0d1879a3d6eb82c5"
+            ]
+        ]
+    },
+    {
+        "id": "47c1dc4c1a138dc0",
+        "type": "Firestore out",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "collection": "Authentication",
+        "document": "",
+        "operation": "add",
+        "admin": "240072d5eab0540f",
+        "eject": false,
+        "x": 1370,
+        "y": 660,
+        "wires": [
+            [
+                "65281a4d0e8b2b0b"
+            ]
+        ]
+    },
+    {
+        "id": "aa0972e6cada76c9",
+        "type": "Firestore in",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "collection": "Authentication",
+        "group": false,
+        "document": "",
+        "realtime": false,
+        "query": [
+            {
+                "where": {
+                    "field": "Username",
+                    "operation": "==",
+                    "value": "Username"
+                }
+            },
+            {
+                "where": {
+                    "field": "Password",
+                    "operation": "==",
+                    "value": "Password"
+                }
+            }
+        ],
+        "admin": "240072d5eab0540f",
+        "snapHandler": "",
+        "eject": false,
+        "x": 590,
+        "y": 500,
+        "wires": [
+            [
+                "2aa9f407335fa4b1"
+            ]
+        ]
+    },
+    {
+        "id": "873aed9de85d11fe",
+        "type": "Firestore in",
+        "z": "1f35d8070d08aa76",
+        "name": "",
+        "collection": "Authentication",
+        "group": false,
+        "document": "",
+        "realtime": false,
+        "query": [
+            {
+                "where": {
+                    "field": "Username",
+                    "operation": "==",
+                    "value": "Username"
+                }
+            }
+        ],
+        "admin": "240072d5eab0540f",
+        "snapHandler": "",
+        "eject": false,
+        "x": 560,
+        "y": 600,
+        "wires": [
+            [
+                "e22713c3420b5ee0"
             ]
         ]
     },
@@ -1474,7 +1505,7 @@
         "type": "function",
         "z": "d4bb2d7a23165e78",
         "name": "toggle logic",
-        "func": "if (msg.payload === 'toggle') {\n    let newState = context.get('state') || 'off';\n    let buttonMsg = {};\n    let notificationMsg = {};\n\n    if (newState === 'off') {\n        buttonMsg = {\n            label: 'High security mode: ON',\n            bgcolor: 'green',\n        };\n        notificationMsg = {\n            payload: 'High security mode: ON'\n        };\n        context.set('state', 'on');\n    }\n    else {\n        buttonMsg = {\n            label: 'High security mode: OFF',\n            bgcolor: 'rgb(33, 150, 243)',\n        };\n        notificationMsg = {\n            payload: 'High security mode: OFF'\n        };\n        context.set('state', 'off');\n    }\n    return [buttonMsg, notificationMsg];\n}\nreturn [null, null];",
+        "func": "if (msg.payload === 'toggle') {\n    let newState = context.get('state') || 'off';\n    let buttonMsg = {};\n    let notificationMsg = {};\n\n    if (newState === 'off') {\n        buttonMsg = {\n            label: 'High security mode: ON',\n            bgcolor: 'green',\n        };\n        notificationMsg = {\n            payload: 'High security mode: ON'\n        };\n        context.set('state', 'on');\n        global.set('HighSecurityMode', true);\n    }\n    else {\n        buttonMsg = {\n            label: 'High security mode: OFF',\n            bgcolor: 'rgb(33, 150, 243)',\n        };\n        notificationMsg = {\n            payload: 'High security mode: OFF'\n        };\n        context.set('state', 'off');\n        global.set('HighSecurityMode', false);\n    }\n    return [buttonMsg, notificationMsg];\n}\nreturn [null, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1509,7 +1540,7 @@
         "className": "",
         "topic": "",
         "name": "toggle notification",
-        "x": 630,
+        "x": 730,
         "y": 260,
         "wires": []
     },
@@ -1648,7 +1679,7 @@
         "payloadType": "json",
         "topic": "topic",
         "topicType": "msg",
-        "x": 250,
+        "x": 230,
         "y": 340,
         "wires": [
             [
@@ -1662,7 +1693,7 @@
         "z": "d4bb2d7a23165e78",
         "name": "View sus act",
         "events": "all",
-        "x": 470,
+        "x": 450,
         "y": 340,
         "wires": [
             []
@@ -1915,7 +1946,8 @@
         "y": 1220,
         "wires": [
             [
-                "73f911fcd0341abd"
+                "73f911fcd0341abd",
+                "2a1f586fcc17a7c4"
             ],
             []
         ]
@@ -1979,10 +2011,76 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 650,
+        "x": 670,
         "y": 1080,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "2a1f586fcc17a7c4",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "check if user's in the room",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"FIRE DETECTED IN YOUR ROOM!!!\\n\\nPLEASE RETURN IMMEDIATELY!!!\"; \n}\nelse {\n    msg.payload = \"FIRE DETECTED IN YOUR ROOM!!!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 1280,
+        "wires": [
+            [
+                "6b05d164702d1956"
+            ]
+        ]
+    },
+    {
+        "id": "6b05d164702d1956",
+        "type": "e-mail",
+        "z": "d4bb2d7a23165e78",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "muramasakuron@gmail.com",
+        "dname": "fire warning email",
+        "x": 930,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "ac168d644e0b2ef5",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "YES!!!!!",
+        "payloadType": "str",
+        "x": 410,
+        "y": 1320,
+        "wires": [
+            [
+                "2a1f586fcc17a7c4"
+            ]
         ]
     },
     {
