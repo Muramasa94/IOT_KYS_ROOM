@@ -131,37 +131,6 @@
         }
     },
     {
-        "id": "baed2b5fea5cbfb2",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "broker.hivemq.com",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
         "id": "b1f263605ac770b2",
         "type": "ui_tab",
         "name": "Home",
@@ -337,12 +306,6 @@
         "width": "8",
         "collapse": false,
         "className": ""
-    },
-    {
-        "id": "ec1fe2d70765080b",
-        "type": "firebase config",
-        "firebaseurl": "kys-database-837f1-default-rtdb",
-        "loginType": "none"
     },
     {
         "id": "240072d5eab0540f",
@@ -2020,5 +1983,46 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "8c74c85be8b890fd",
+        "type": "http request",
+        "z": "f658764c92914247",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/channels/2621663/feeds.json?results=1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": true,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "9d6401a7add0457d"
+            ]
+        ]
+    },
+    {
+        "id": "9d6401a7add0457d",
+        "type": "debug",
+        "z": "f658764c92914247",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 180,
+        "wires": []
     }
 ]
