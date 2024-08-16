@@ -5,7 +5,6 @@
 #include <PubSubClient.h>
 #include <WiFiManager.h>
 #include "ThingSpeak.h"
-#include <FirebaseESP32.h>
 
 // High security mode toggle
 bool HIGH_SECURITY_MODE = false;
@@ -17,10 +16,6 @@ int port = 1883;
 //***Set WiFi credentials***
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
-
-// firebase api
-const char* firebaseHost = "https://kys-database-837f1-default-rtdb.firebaseio.com/";
-const char* firebaseSecret = "ivEgKvsKpJbuNI8yjxvLfmNLVs9Q3ulkJIeyxml0"
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 // SDA: 21
@@ -42,7 +37,7 @@ int buzzerPin = 4;
 // relay: 19
 int relayPin = 19;
 
-// flame sensor: 35
+// flame sensor: 13
 int flamePin = 13;
 
 // MQ2: 35
@@ -272,9 +267,9 @@ void detect_pir() {
 }
 
 int map_brightness(int sensorValue) {
-  if (sensorValue > 200) {
+  if (sensorValue > 90) {
     return 0;
   } else {
-    return map(sensorValue, 0, 200, 255, 0);
+    return map(sensorValue, 0, 90, 255, 0);
   }
 }
