@@ -553,6 +553,47 @@
         ]
     },
     {
+        "id": "6f9aa75384b0d1dd",
+        "type": "inject",
+        "z": "70d1edf009669b1f",
+        "name": "Hide tabs other than Home",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"tabs\":{\"hide\":[\"User Authentication\",\"Menu\",\"Suspicious Activities\"],\"disable\":[]}}",
+        "payloadType": "json",
+        "x": 780,
+        "y": 200,
+        "wires": [
+            [
+                "431c38c37e31c0a9"
+            ]
+        ]
+    },
+    {
+        "id": "431c38c37e31c0a9",
+        "type": "ui_ui_control",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "events": "all",
+        "x": 980,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "77f9d30709e26941",
         "type": "ui_form",
         "z": "1f35d8070d08aa76",
