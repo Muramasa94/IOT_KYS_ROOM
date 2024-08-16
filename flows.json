@@ -621,11 +621,19 @@
                 "type": "password",
                 "required": true,
                 "rows": null
+            },
+            {
+                "label": "Email",
+                "value": "Email",
+                "type": "email",
+                "required": true,
+                "rows": null
             }
         ],
         "formValue": {
             "Username": "",
-            "Password": ""
+            "Password": "",
+            "Email": ""
         },
         "payload": "",
         "submit": "submit",
@@ -639,7 +647,7 @@
         "wires": [
             [
                 "49af8320557ff11c",
-                "bca7423bbc818aba"
+                "8f8e03774e9787ad"
             ]
         ]
     },
@@ -1062,7 +1070,7 @@
         "type": "function",
         "z": "1f35d8070d08aa76",
         "name": "function 3",
-        "func": "msg.firestore =\n{\n  query : [\n      {where: [\"Password\", \"==\", msg.payload.Password]},\n      {where: [\"Username\", \"==\", msg.payload.Username]}\n  ]\n}\nreturn msg;",
+        "func": "msg.firestore =\n{\n  query : [\n      {where: [\"Password\", \"==\", msg.payload.Password]},\n      {where: [\"Username\", \"==\", msg.payload.Username]},\n      {where: [\"Email\", \"==\", msg.payload.Email]}\n  ]\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1204,24 +1212,6 @@
         "wires": []
     },
     {
-        "id": "bca7423bbc818aba",
-        "type": "function",
-        "z": "1f35d8070d08aa76",
-        "name": "function 5",
-        "func": "flow.set('auth', msg.payload)\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "65281a4d0e8b2b0b",
         "type": "change",
         "z": "1f35d8070d08aa76",
@@ -1335,7 +1325,8 @@
         "y": 500,
         "wires": [
             [
-                "2aa9f407335fa4b1"
+                "2aa9f407335fa4b1",
+                "bd96e4dcc622931a"
             ]
         ]
     },
@@ -1355,6 +1346,13 @@
                     "operation": "==",
                     "value": "Username"
                 }
+            },
+            {
+                "where": {
+                    "field": "Email",
+                    "operation": "==",
+                    "value": "Email"
+                }
             }
         ],
         "admin": "240072d5eab0540f",
@@ -1366,6 +1364,42 @@
             [
                 "e22713c3420b5ee0"
             ]
+        ]
+    },
+    {
+        "id": "bd96e4dcc622931a",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 5",
+        "func": "global.set('email', msg.payload.Email)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f8e03774e9787ad",
+        "type": "function",
+        "z": "1f35d8070d08aa76",
+        "name": "function 6",
+        "func": "flow.set(\"auth\", msg.payload)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 680,
+        "wires": [
+            []
         ]
     },
     {
