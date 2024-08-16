@@ -313,6 +313,17 @@
         "name": ""
     },
     {
+        "id": "c6fa3ef31ed5ffa6",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "8d3b3ef0511411c5",
+        "order": 1,
+        "disp": true,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "0370849dbb064aa3",
         "type": "ui_text",
         "z": "70d1edf009669b1f",
@@ -2122,50 +2133,14 @@
         ]
     },
     {
-        "id": "30877591fc987179",
-        "type": "ui_iframe",
-        "z": "f658764c92914247",
-        "group": "003679c57e7c999b",
-        "name": "",
-        "order": 0,
-        "width": "8",
-        "height": "5",
-        "url": "https://thingspeak.com/channels/2621663/charts/1?api_key=PTEXQU2IMROB7A5L",
-        "origin": "*",
-        "scale": "100",
-        "x": 390,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a26af1a0d41b3dd1",
-        "type": "ui_iframe",
-        "z": "f658764c92914247",
-        "group": "f7a55b8496ef909b",
-        "name": "",
-        "order": 0,
-        "width": "8",
-        "height": "5",
-        "url": "https://thingspeak.com/channels/2621663/charts/2?api_key=PTEXQU2IMROB7A5L",
-        "origin": "*",
-        "scale": "100",
-        "x": 390,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "8c74c85be8b890fd",
         "type": "http request",
         "z": "f658764c92914247",
         "name": "",
         "method": "GET",
-        "ret": "txt",
+        "ret": "obj",
         "paytoqs": "ignore",
-        "url": "https://api.thingspeak.com/channels/2621663/feeds.json?results=1",
+        "url": "https://api.thingspeak.com/channels/2621663/feeds.json?results=100",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -2177,25 +2152,73 @@
         "y": 180,
         "wires": [
             [
-                "9d6401a7add0457d"
+                "06433b5bf2ed745e"
             ]
         ]
     },
     {
-        "id": "9d6401a7add0457d",
-        "type": "debug",
+        "id": "4b81c2a0aec6fbc6",
+        "type": "inject",
         "z": "f658764c92914247",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 600,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "8c74c85be8b890fd"
+            ]
+        ]
+    },
+    {
+        "id": "967ec23fd60f2b8b",
+        "type": "ui_table",
+        "z": "f658764c92914247",
+        "group": "c6fa3ef31ed5ffa6",
+        "name": "",
+        "order": 0,
+        "width": "20",
+        "height": "15",
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 690,
         "y": 180,
         "wires": []
+    },
+    {
+        "id": "06433b5bf2ed745e",
+        "type": "function",
+        "z": "f658764c92914247",
+        "name": "function 7",
+        "func": "// Access the incoming message payload\nlet payload = msg.payload;\n\n// Extract the necessary data\nlet channel = payload.channel;\nlet feeds = payload.feeds;\n\n// Create a new JSON object for each feed entry\nlet output = feeds.map(feed => {\n    return {\n        time: feed.created_at,\n        temperature: feed.field2 !== null ? feed.field2: 'N/A',\n        humidity: feed.field1 !== null ? feed.field1: 'N/A',\n        gasLevel: feed.field3 !== null ? feed.field3 : 'N/A'  // Handle null values\n    };\n});\n\n// Set the new payload to the output message\nmsg.payload = output;\n\n// Return the modified message\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "967ec23fd60f2b8b"
+            ]
+        ]
     }
 ]
