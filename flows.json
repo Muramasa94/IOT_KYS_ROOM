@@ -1766,7 +1766,7 @@
         "fontSize": "20",
         "color": "#000000",
         "x": 370,
-        "y": 960,
+        "y": 920,
         "wires": []
     },
     {
@@ -1787,7 +1787,7 @@
         "payload": "Fire/Toxic gas hazard",
         "payloadType": "str",
         "x": 240,
-        "y": 960,
+        "y": 920,
         "wires": [
             [
                 "f44426d4efbb4846"
@@ -1840,7 +1840,7 @@
         "diff": false,
         "className": "",
         "x": 510,
-        "y": 1020,
+        "y": 980,
         "wires": []
     },
     {
@@ -1939,7 +1939,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 200,
-        "y": 1020,
+        "y": 980,
         "wires": [
             [
                 "3b09cf228b85076c",
@@ -2033,37 +2033,29 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "",
+                "v": "3000",
                 "vt": "str"
+            },
+            {
+                "t": "btwn",
+                "v": "1500",
+                "vt": "num",
+                "v2": "3000",
+                "v2t": "num"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 450,
-        "y": 1080,
+        "y": 1040,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "818fde57aba35349",
-        "type": "http request",
-        "z": "d4bb2d7a23165e78",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": false,
-        "url": "",
-        "persist": false,
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 670,
-        "y": 1080,
-        "wires": [
-            []
+            [
+                "7126d9b6bcac5f34"
+            ],
+            [
+                "41335e4887470874"
+            ]
         ]
     },
     {
@@ -2129,6 +2121,109 @@
         "wires": [
             [
                 "2a1f586fcc17a7c4"
+            ]
+        ]
+    },
+    {
+        "id": "7126d9b6bcac5f34",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "check if user's in the room",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nDO NOT ENTER YOUR ROOM!!!\"; \n}\nelse {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 1040,
+        "wires": [
+            [
+                "6dc1f448e9877e4c"
+            ]
+        ]
+    },
+    {
+        "id": "6dc1f448e9877e4c",
+        "type": "e-mail",
+        "z": "d4bb2d7a23165e78",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "muramasakuron@gmail.com",
+        "dname": "toxic gas warning email HIGH",
+        "x": 990,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "41335e4887470874",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "check if user's in the room",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nEnter at your own risk.\"; \n}\nelse {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nIdentify the source or leave immediately.\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 1080,
+        "wires": [
+            [
+                "53673aae1e6e1c0e"
+            ]
+        ]
+    },
+    {
+        "id": "53673aae1e6e1c0e",
+        "type": "e-mail",
+        "z": "d4bb2d7a23165e78",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "muramasakuron@gmail.com",
+        "dname": "toxic gas warning email MODERATE",
+        "x": 1010,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "30f7132717a82784",
+        "type": "inject",
+        "z": "d4bb2d7a23165e78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "4000",
+        "payloadType": "str",
+        "x": 290,
+        "y": 1080,
+        "wires": [
+            [
+                "8c0ce92ce5194c83"
             ]
         ]
     },
