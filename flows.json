@@ -1718,7 +1718,7 @@
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "View suspicious activities",
+        "label": "View activity history",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -1728,7 +1728,7 @@
         "payloadType": "json",
         "topic": "topic",
         "topicType": "msg",
-        "x": 230,
+        "x": 210,
         "y": 340,
         "wires": [
             [
