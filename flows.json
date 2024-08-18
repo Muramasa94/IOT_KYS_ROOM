@@ -641,7 +641,7 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 200,
+        "x": 140,
         "y": 500,
         "wires": [
             [
@@ -694,7 +694,7 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 200,
+        "x": 140,
         "y": 600,
         "wires": [
             [
@@ -963,7 +963,7 @@
         "id": "9328754978532db5",
         "type": "function",
         "z": "1f35d8070d08aa76",
-        "name": "function 1",
+        "name": "form query from login input",
         "func": "msg.firestore =\n{\n  query : [\n      {where: [\"Password\", \"==\", msg.payload.Password]},\n      {where: [\"Username\", \"==\", msg.payload.Username]}\n  ]\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -971,7 +971,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 390,
+        "x": 360,
         "y": 500,
         "wires": [
             [
@@ -983,7 +983,7 @@
         "id": "2aa9f407335fa4b1",
         "type": "function",
         "z": "1f35d8070d08aa76",
-        "name": "function 2",
+        "name": "check empty object",
         "func": "if (typeof msg.payload === 'object' && msg.payload !== null && Object.keys(msg.payload).length === 0) {\n    // msg.payload is an empty object\n    msg.payload = \"false\"; // Set msg.payload to false\n} else {\n    // msg.payload is not an empty object or is not an object\n    msg.payload = \"true\"; // Set msg.payload to true\n}\nreturn msg; // Always return msg to continue the flow\n\n",
         "outputs": 1,
         "timeout": 0,
@@ -991,7 +991,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
+        "x": 830,
         "y": 500,
         "wires": [
             [
@@ -1121,7 +1121,7 @@
         "id": "49af8320557ff11c",
         "type": "function",
         "z": "1f35d8070d08aa76",
-        "name": "function 3",
+        "name": "form query from signup input",
         "func": "msg.firestore =\n{\n  query : [\n      {where: [\"Password\", \"==\", msg.payload.Password]},\n      {where: [\"Username\", \"==\", msg.payload.Username]},\n      {where: [\"Email\", \"==\", msg.payload.Email]}\n  ]\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -1141,7 +1141,7 @@
         "id": "e22713c3420b5ee0",
         "type": "function",
         "z": "1f35d8070d08aa76",
-        "name": "function 4",
+        "name": "check empty object",
         "func": "if (typeof msg.payload === 'object' && msg.payload !== null && Object.keys(msg.payload).length === 0) {\n    // msg.payload is an empty object\n    msg.payload = \"false\"; // Set msg.payload to false\n} else {\n    // msg.payload is not an empty object or is not an object\n    msg.payload = \"true\"; // Set msg.payload to true\n}\nreturn msg; // Always return msg to continue the flow\n\n",
         "outputs": 1,
         "timeout": 0,
@@ -1149,7 +1149,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 760,
+        "x": 790,
         "y": 600,
         "wires": [
             [
@@ -1373,7 +1373,7 @@
         "admin": "240072d5eab0540f",
         "snapHandler": "",
         "eject": false,
-        "x": 590,
+        "x": 620,
         "y": 500,
         "wires": [
             [
@@ -1410,7 +1410,7 @@
         "admin": "240072d5eab0540f",
         "snapHandler": "",
         "eject": false,
-        "x": 560,
+        "x": 580,
         "y": 600,
         "wires": [
             [
@@ -1422,15 +1422,15 @@
         "id": "bd96e4dcc622931a",
         "type": "function",
         "z": "1f35d8070d08aa76",
-        "name": "function 5",
-        "func": "global.set('email', msg.payload.Email)",
+        "name": "Set global email",
+        "func": "var key = Object.keys(msg.payload)[0];\nglobal.set('email', msg.payload[key].Email)",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
+        "x": 820,
         "y": 440,
         "wires": [
             []
@@ -1440,7 +1440,7 @@
         "id": "8f8e03774e9787ad",
         "type": "function",
         "z": "1f35d8070d08aa76",
-        "name": "function 6",
+        "name": "set flow auth",
         "func": "flow.set(\"auth\", msg.payload)",
         "outputs": 1,
         "timeout": 0,
@@ -1448,7 +1448,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 370,
         "y": 680,
         "wires": [
             []
@@ -2063,7 +2063,7 @@
         "type": "function",
         "z": "d4bb2d7a23165e78",
         "name": "check if user's in the room",
-        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"FIRE DETECTED IN YOUR ROOM!!!\\n\\nPLEASE RETURN IMMEDIATELY!!!\"; \n}\nelse {\n    msg.payload = \"FIRE DETECTED IN YOUR ROOM!!!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nreturn msg;",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"FIRE DETECTED IN YOUR ROOM!!!\\n\\nPLEASE RETURN IMMEDIATELY!!!\"; \n}\nelse {\n    msg.payload = \"FIRE DETECTED IN YOUR ROOM!!!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nmsg.to = global.get('email');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2074,7 +2074,8 @@
         "y": 1280,
         "wires": [
             [
-                "6b05d164702d1956"
+                "6b05d164702d1956",
+                "bca207d055ee37a0"
             ]
         ]
     },
@@ -2089,7 +2090,7 @@
         "token": "oauth2Response.access_token",
         "secure": true,
         "tls": true,
-        "name": "muramasakuron@gmail.com",
+        "name": "",
         "dname": "fire warning email",
         "x": 930,
         "y": 1280,
@@ -2129,7 +2130,7 @@
         "type": "function",
         "z": "d4bb2d7a23165e78",
         "name": "check if user's in the room",
-        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nDO NOT ENTER YOUR ROOM!!!\"; \n}\nelse {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nreturn msg;",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nDO NOT ENTER YOUR ROOM!!!\"; \n}\nelse {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nmsg.to = global.get('email');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2155,7 +2156,7 @@
         "token": "oauth2Response.access_token",
         "secure": true,
         "tls": true,
-        "name": "muramasakuron@gmail.com",
+        "name": "",
         "dname": "toxic gas warning email HIGH",
         "x": 990,
         "y": 1040,
@@ -2166,7 +2167,7 @@
         "type": "function",
         "z": "d4bb2d7a23165e78",
         "name": "check if user's in the room",
-        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nEnter at your own risk.\"; \n}\nelse {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nIdentify the source or leave immediately.\";\n}\nreturn msg;",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nEnter at your own risk.\"; \n}\nelse {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nIdentify the source or leave immediately.\";\n}\nmsg.to = global.get('email');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2192,7 +2193,7 @@
         "token": "oauth2Response.access_token",
         "secure": true,
         "tls": true,
-        "name": "muramasakuron@gmail.com",
+        "name": "",
         "dname": "toxic gas warning email MODERATE",
         "x": 1010,
         "y": 1080,
@@ -2226,6 +2227,23 @@
                 "8c0ce92ce5194c83"
             ]
         ]
+    },
+    {
+        "id": "bca207d055ee37a0",
+        "type": "debug",
+        "z": "d4bb2d7a23165e78",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "to",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 1340,
+        "wires": []
     },
     {
         "id": "8c74c85be8b890fd",
@@ -2292,7 +2310,7 @@
         "columns": [],
         "outputs": 0,
         "cts": false,
-        "x": 690,
+        "x": 730,
         "y": 180,
         "wires": []
     },
@@ -2300,7 +2318,7 @@
         "id": "06433b5bf2ed745e",
         "type": "function",
         "z": "f658764c92914247",
-        "name": "function 7",
+        "name": "create json objects",
         "func": "// Access the incoming message payload\nlet payload = msg.payload;\n\n// Extract the necessary data\nlet channel = payload.channel;\nlet feeds = payload.feeds;\n\n// Create a new JSON object for each feed entry\nlet output = feeds.map(feed => {\n    return {\n        time: feed.created_at,\n        temperature: feed.field2 !== null ? feed.field2: 'N/A',\n        humidity: feed.field1 !== null ? feed.field1: 'N/A',\n        gasLevel: feed.field3 !== null ? feed.field3 : 'N/A'  // Handle null values\n    };\n});\n\n// Set the new payload to the output message\nmsg.payload = output;\n\n// Return the modified message\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -2308,7 +2326,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 550,
         "y": 180,
         "wires": [
             [
