@@ -1382,7 +1382,7 @@
         "type": "function",
         "z": "1f35d8070d08aa76",
         "name": "function 5",
-        "func": "global.set('email', msg.payload.Email)",
+        "func": "global.set('email', msg.payload.Email)\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1902,7 +1902,7 @@
         "wires": [
             [
                 "3b09cf228b85076c",
-                "8c0ce92ce5194c83"
+                "fbbfbffaf9efc022"
             ]
         ]
     },
@@ -1991,18 +1991,20 @@
         "propertyType": "msg",
         "rules": [
             {
-                "t": "gt",
-                "v": "",
-                "vt": "str"
+                "t": "gte",
+                "v": "3000",
+                "vt": "num"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 450,
+        "x": 630,
         "y": 1080,
         "wires": [
-            []
+            [
+                "818fde57aba35349"
+            ]
         ]
     },
     {
@@ -2012,14 +2014,16 @@
         "name": "",
         "method": "GET",
         "ret": "txt",
-        "paytoqs": false,
-        "url": "",
+        "paytoqs": "ignore",
+        "url": "http://www.pushsafer.com/api?k=xUszs3ICNpeFR4LxfquP&m=Dangerout%20Gas%20Level%20Alert!",
+        "tls": "",
         "persist": false,
+        "proxy": "",
         "insecureHTTPParser": false,
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 670,
+        "x": 830,
         "y": 1080,
         "wires": [
             []
@@ -2092,6 +2096,26 @@
         ]
     },
     {
+        "id": "fbbfbffaf9efc022",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "Typecast Number",
+        "func": "msg.payload = Number(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 1080,
+        "wires": [
+            [
+                "8c0ce92ce5194c83"
+            ]
+        ]
+    },
+    {
         "id": "8c74c85be8b890fd",
         "type": "http request",
         "z": "f658764c92914247",
@@ -2107,7 +2131,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 350,
+        "x": 330,
         "y": 180,
         "wires": [
             [
@@ -2129,7 +2153,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "300",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
