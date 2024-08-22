@@ -564,6 +564,47 @@
         ]
     },
     {
+        "id": "6f9aa75384b0d1dd",
+        "type": "inject",
+        "z": "70d1edf009669b1f",
+        "name": "Hide tabs other than Home",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"tabs\":{\"hide\":[\"User Authentication\",\"Menu\",\"Suspicious Activities\"],\"disable\":[]}}",
+        "payloadType": "json",
+        "x": 780,
+        "y": 200,
+        "wires": [
+            [
+                "431c38c37e31c0a9"
+            ]
+        ]
+    },
+    {
+        "id": "431c38c37e31c0a9",
+        "type": "ui_ui_control",
+        "z": "70d1edf009669b1f",
+        "name": "",
+        "events": "all",
+        "x": 980,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "77f9d30709e26941",
         "type": "ui_form",
         "z": "1f35d8070d08aa76",
@@ -1902,7 +1943,7 @@
         "wires": [
             [
                 "3b09cf228b85076c",
-                "8c0ce92ce5194c83"
+                "fbbfbffaf9efc022"
             ]
         ]
     },
@@ -1993,7 +2034,7 @@
             {
                 "t": "gt",
                 "v": "3000",
-                "vt": "str"
+                "vt": "num"
             },
             {
                 "t": "btwn",
@@ -2006,7 +2047,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 450,
+        "x": 730,
         "y": 1040,
         "wires": [
             [
@@ -2096,13 +2137,104 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 1080,
+        "x": 490,
+        "y": 1040,
         "wires": [
             [
                 "8c0ce92ce5194c83"
             ]
         ]
+    },
+    {
+        "id": "7126d9b6bcac5f34",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "check if user's in the room",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nDO NOT ENTER YOUR ROOM!!!\"; \n}\nelse {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nmsg.to = global.get('email');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 1020,
+        "wires": [
+            [
+                "6dc1f448e9877e4c"
+            ]
+        ]
+    },
+    {
+        "id": "6dc1f448e9877e4c",
+        "type": "e-mail",
+        "z": "d4bb2d7a23165e78",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "toxic gas warning email HIGH",
+        "x": 1410,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "41335e4887470874",
+        "type": "function",
+        "z": "d4bb2d7a23165e78",
+        "name": "check if user's in the room",
+        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nEnter at your own risk.\"; \n}\nelse {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nIdentify the source or leave immediately.\";\n}\nmsg.to = global.get('email');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 1080,
+        "wires": [
+            [
+                "53673aae1e6e1c0e"
+            ]
+        ]
+    },
+    {
+        "id": "53673aae1e6e1c0e",
+        "type": "e-mail",
+        "z": "d4bb2d7a23165e78",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "toxic gas warning email MODERATE",
+        "x": 1430,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "bca207d055ee37a0",
+        "type": "debug",
+        "z": "d4bb2d7a23165e78",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "to",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 1340,
+        "wires": []
     },
     {
         "id": "8c74c85be8b890fd",
@@ -2192,166 +2324,5 @@
                 "967ec23fd60f2b8b"
             ]
         ]
-    },
-    {
-        "id": "6f9aa75384b0d1dd",
-        "type": "inject",
-        "z": "70d1edf009669b1f",
-        "name": "Hide tabs other than Home",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"tabs\":{\"hide\":[\"User Authentication\",\"Menu\",\"Suspicious Activities\"],\"disable\":[]}}",
-        "payloadType": "json",
-        "x": 780,
-        "y": 200,
-        "wires": [
-            [
-                "431c38c37e31c0a9"
-            ]
-        ]
-    },
-    {
-        "id": "431c38c37e31c0a9",
-        "type": "ui_ui_control",
-        "z": "70d1edf009669b1f",
-        "name": "",
-        "events": "all",
-        "x": 980,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7126d9b6bcac5f34",
-        "type": "function",
-        "z": "d4bb2d7a23165e78",
-        "name": "check if user's in the room",
-        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nDO NOT ENTER YOUR ROOM!!!\"; \n}\nelse {\n    msg.payload = \"HIGH amount of toxic gas detected in your room!\\n\\nPLEASE LEAVE IMMEDIATELY!!!\";\n}\nmsg.to = global.get('email');\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 1040,
-        "wires": [
-            [
-                "6dc1f448e9877e4c"
-            ]
-        ]
-    },
-    {
-        "id": "6dc1f448e9877e4c",
-        "type": "e-mail",
-        "z": "d4bb2d7a23165e78",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "authtype": "BASIC",
-        "saslformat": true,
-        "token": "oauth2Response.access_token",
-        "secure": true,
-        "tls": true,
-        "name": "",
-        "dname": "toxic gas warning email HIGH",
-        "x": 990,
-        "y": 1040,
-        "wires": []
-    },
-    {
-        "id": "41335e4887470874",
-        "type": "function",
-        "z": "d4bb2d7a23165e78",
-        "name": "check if user's in the room",
-        "func": "let is_away = global.get('HighSecurityMode');\n\n// if user is not inside the room\nif (is_away) {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nEnter at your own risk.\"; \n}\nelse {\n    msg.payload = \"MODERATE amount of toxic gas detected in your room!\\n\\nIdentify the source or leave immediately.\";\n}\nmsg.to = global.get('email');\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 1080,
-        "wires": [
-            [
-                "53673aae1e6e1c0e"
-            ]
-        ]
-    },
-    {
-        "id": "53673aae1e6e1c0e",
-        "type": "e-mail",
-        "z": "d4bb2d7a23165e78",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "authtype": "BASIC",
-        "saslformat": true,
-        "token": "oauth2Response.access_token",
-        "secure": true,
-        "tls": true,
-        "name": "",
-        "dname": "toxic gas warning email MODERATE",
-        "x": 1010,
-        "y": 1080,
-        "wires": []
-    },
-    {
-        "id": "30f7132717a82784",
-        "type": "inject",
-        "z": "d4bb2d7a23165e78",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "4000",
-        "payloadType": "str",
-        "x": 290,
-        "y": 1080,
-        "wires": [
-            [
-                "8c0ce92ce5194c83"
-            ]
-        ]
-    },
-    {
-        "id": "bca207d055ee37a0",
-        "type": "debug",
-        "z": "d4bb2d7a23165e78",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "to",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 1340,
-        "wires": []
     }
 ]
